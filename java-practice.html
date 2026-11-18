@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151a17">
+  <meta name="description" content="Java Practice Lab — luyện vòng lặp, hướng đối tượng và mảng qua bài tập ngắn có gợi ý, lời giải và câu hỏi tự kiểm tra.">
+  <title>Java Practice Lab — Nguyễn Thái Học</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="java-practice.css">
+  <style>.source-section{padding:45px 8%;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:center}.source-section h2{font:600 19px var(--display);letter-spacing:-.04em;margin:7px 0}.source-section p{font-size:10px;line-height:1.7;color:#788073;margin:0}.source-links{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.source-links a{background:var(--paper);border:1px solid #e0e4da;padding:12px 10px;color:#515e45;text-decoration:none;font:8px var(--mono);transition:background .18s,border-color .18s}.source-links a:hover{background:#e8f1db;border-color:#c6d7ab}.source-links a span{display:block;color:#95a08c;font-size:7px;margin-bottom:8px}.learning-path{padding:46px 8% 52px;background:#f1f3ed;border-bottom:1px solid var(--line)}.path-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:21px}.path-heading h2{font:600 22px var(--display);letter-spacing:-.05em;margin:8px 0 0}.path-heading p{max-width:350px;color:#768071;font-size:10px;line-height:1.7;margin:0}.path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.path-card{background:#fbfcf9;border:1px solid #dfe4da;padding:17px;min-width:0}.path-card>span{font:9px var(--mono);color:#8aa563;letter-spacing:.1em}.path-card h3{font:600 14px var(--display);margin:10px 0 7px;color:#2b342b}.path-card p{font-size:10px;line-height:1.65;color:#6d776b;margin:0}.path-card .pitfall{padding-top:11px;margin-top:12px;border-top:1px solid #e7eae2;color:#7a684d}.path-note{margin-top:13px;padding:12px 15px;border-left:2px solid #a6c46b;background:#e7eddc;color:#56614c;font-size:9px;line-height:1.6}.path-note b{font-weight:700}@media(max-width:680px){.source-section{padding:32px 20px;grid-template-columns:1fr;gap:18px}.source-links{grid-template-columns:1fr}.source-links a{font-size:9px}.learning-path{padding:34px 20px}.path-heading{display:block}.path-heading p{margin-top:11px}.path-grid{grid-template-columns:1fr}}</style>
+  <script src="java-practice.js" defer></script>
+</head>
+<body id="top">
+  <div class="lab-shell">
+    <header class="lab-header">
+      <a class="lab-brand" href="index.html"><span class="brand-symbol">J<span>.</span></span><span>JAVA PRACTICE LAB<small>BY NGUYỄN THÁI HỌC</small></span></a>
+      <nav class="lab-nav" aria-label="Lab navigation"><a href="#exercises" data-i18n="navExercises">Bài tập</a><a href="#quiz" data-i18n="navQuiz">Tự kiểm tra</a></nav>
+      <div class="header-actions"><div class="language-switch"><button type="button" class="lang active" data-lang="vi" aria-pressed="true">VI</button><span>/</span><button type="button" class="lang" data-lang="en" aria-pressed="false">EN</button></div><a class="back-link" href="index.html"><span>←</span><span data-i18n="backPortfolio">Về portfolio</span></a></div>
+    </header>
+    <main>
+      <section class="lab-hero">
+        <div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span><span data-i18n="heroEyebrow">MỘT PHÒNG LUYỆN TẬP NHỎ</span></div><h1 data-i18n="heroTitle">Viết code.<br><em>Hiểu sâu hơn.</em></h1><p data-i18n="heroIntro">Thực hành những nền tảng Java quan trọng qua ví dụ ngắn, gợi ý từng bước và lời giải có thể đọc lại.</p><a class="hero-cta" href="#exercises"><span data-i18n="startLearning">Bắt đầu luyện tập</span><span>↓</span></a><div class="hero-stats"><div><b>03</b><span data-i18n="statExercises">BÀI TẬP</span></div><i></i><div><b>03</b><span data-i18n="statTopics">CHỦ ĐỀ NỀN TẢNG</span></div><i></i><div><b>01</b><span data-i18n="statQuiz">QUIZ NHANH</span></div></div></div>
+        <div class="terminal-card" aria-label="Java code example"><div class="terminal-top"><div class="window-dots"><i></i><i></i><i></i></div><span>Practice.java</span><span class="terminal-status">JAVA</span></div><pre><code><span class="code-muted">// keep it simple</span>
+<span class="code-purple">public class</span> <span class="code-yellow">Practice</span> {
+  <span class="code-purple">public static void</span> main(<span class="code-yellow">String</span>[] args) {
+    <span class="code-purple">int</span> progress = <span class="code-orange">1</span>;
+
+    <span class="code-green">while</span> (progress &lt;= <span class="code-orange">3</span>) {
+      learn(progress);
+      progress++;
+    }
+  }
+}</code></pre><div class="terminal-foot"><span class="terminal-pulse"></span><span data-i18n="terminalCaption">Chạy thử bằng JDK trên máy của bạn</span><span class="terminal-cursor">_</span></div></div>
+        <div class="hero-index">JAVA / 001 <span>•</span> FUNDAMENTALS</div>
+      </section>
+
+      <section class="intro-strip"><span class="strip-symbol">✳</span><p data-i18n="stripText">Cách học gợi ý: tự làm trước → xem gợi ý → đọc lời giải → giải thích lại bằng lời của bạn.</p><span class="strip-side">LEARN BY DOING</span></section>
+
+      <section class="learning-path"><div class="path-heading"><div><div class="section-label"><span>00 /</span><span data-i18n="pathLabel">LEARNING ROADMAP</span></div><h2 data-i18n="pathTitle">Nắm chắc ba mảnh ghép Java.</h2></div><p data-i18n="pathIntro">Mỗi bài tập nối một khái niệm cốt lõi với mục tiêu thực hành và một lỗi thường gặp cần để ý.</p></div><div class="path-grid"><article class="path-card"><span>01 · LOOP</span><h3 data-i18n="pathLoopTitle">Vòng lặp &amp; tích lũy</h3><p data-i18n="pathLoopText">Theo dõi biến đếm, điều kiện dừng và biến tổng để mô tả một quá trình lặp có quy luật.</p><p class="pitfall"><b data-i18n="pitfallLabel">Dễ sai:</b> <span data-i18n="pathLoopPitfall">Lệch cận vòng lặp hoặc quên khởi tạo tổng bằng 0.</span></p></article><article class="path-card"><span>02 · OOP</span><h3 data-i18n="pathOopTitle">Class &amp; đóng gói</h3><p data-i18n="pathOopText">Biểu diễn một đối tượng bằng trạng thái và hành vi; constructor tạo trạng thái ban đầu nhất quán.</p><p class="pitfall"><b data-i18n="pitfallLabel">Dễ sai:</b> <span data-i18n="pathOopPitfall">Nhầm constructor với method hoặc để lộ trường dữ liệu không cần thiết.</span></p></article><article class="path-card"><span>03 · ARRAY</span><h3 data-i18n="pathArrayTitle">Mảng &amp; kiểm thử biên</h3><p data-i18n="pathArrayText">Duyệt từng phần tử, duy trì giá trị tốt nhất và thử dữ liệu âm, một phần tử, hoặc mảng rỗng.</p><p class="pitfall"><b data-i18n="pitfallLabel">Dễ sai:</b> <span data-i18n="pathArrayPitfall">Khởi tạo max bằng 0 khiến mảng toàn số âm cho kết quả sai.</span></p></article></div><div class="path-note"><b data-i18n="labGoalLabel">Mục tiêu sau lab:</b> <span data-i18n="labGoal">Tự viết lời giải, giải thích độ đúng bằng lời và kiểm tra ít nhất một trường hợp biên trước khi xem đáp án.</span></div></section>
+
+      <section class="exercise-section" id="exercises">
+        <div class="section-head"><div><div class="section-label"><span>01 /</span><span data-i18n="exerciseLabel">PRACTICE SET</span></div><h2 data-i18n="exerciseTitle">Ba bước xây<br><em>nền tảng vững.</em></h2></div><p data-i18n="exerciseIntro">Đọc đề bài và thử tự viết lời giải trước khi mở phần hướng dẫn. Không cần cài gì cho trang này — chỉ cần một JDK để chạy code trên máy.</p></div>
+        <div class="exercise-grid">
+          <article class="exercise-card" id="loops">
+            <div class="card-topline"><span class="card-number">01</span><span class="difficulty" data-i18n="beginner">CƠ BẢN</span></div>
+            <div class="topic-icon icon-loop"><span>↻</span></div><div class="topic-label">LOOPS · INT</div>
+            <h3 data-i18n="loopTitle">Tính tổng từ 1 đến n</h3><p class="task-copy" data-i18n="loopTask">Viết hàm nhận số nguyên n và trả về tổng 1 + 2 + … + n. Với n = 5, kết quả cần là 15.</p>
+            <div class="sample-box"><span data-i18n="exampleLabel">VÍ DỤ</span><code>sumTo(5) <b>→</b> 15</code></div>
+            <button class="text-button hint-toggle" type="button" aria-expanded="false"><span data-i18n="showHint">Xem gợi ý</span><span>＋</span></button><div class="hint-content" hidden data-i18n="loopHint">Tạo biến sum bắt đầu từ 0. Dùng vòng lặp for từ 1 đến n, mỗi lượt cộng i vào sum.</div>
+            <button class="solution-toggle" type="button" aria-expanded="false"><span data-i18n="showSolution">Mở lời giải</span><span>↘</span></button>
+            <div class="solution-content" hidden><div class="code-toolbar"><span>SumCalculator.java</span><button type="button" class="copy-button" data-i18n="copyCode">Sao chép</button></div><pre><code>public class SumCalculator {
+    public static int sumTo(int n) {
+        int sum = 0;
+        for (int i = 1; i &lt;= n; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+}</code></pre><p data-i18n="loopExplain">Mỗi vòng lặp cộng thêm i vào sum. Khi i vượt quá n, hàm trả lại tổng đã tích lũy.</p></div>
+          </article>
+
+          <article class="exercise-card" id="oop">
+            <div class="card-topline"><span class="card-number">02</span><span class="difficulty" data-i18n="beginner">CƠ BẢN</span></div>
+            <div class="topic-icon icon-oop"><span>◇</span></div><div class="topic-label">OOP · CLASS</div>
+            <h3 data-i18n="oopTitle">Mô hình hóa một cuốn sách</h3><p class="task-copy" data-i18n="oopTask">Tạo class Book có title và price. Dùng constructor để khởi tạo hai thuộc tính và viết getter để đọc dữ liệu.</p>
+            <div class="sample-box"><span data-i18n="exampleLabel">VÍ DỤ</span><code>new Book(<b>"Clean Code"</b>, 12.5)</code></div>
+            <button class="text-button hint-toggle" type="button" aria-expanded="false"><span data-i18n="showHint">Xem gợi ý</span><span>＋</span></button><div class="hint-content" hidden data-i18n="oopHint">Đặt thuộc tính là private. Constructor có cùng tên với class và không có kiểu trả về.</div>
+            <button class="solution-toggle" type="button" aria-expanded="false"><span data-i18n="showSolution">Mở lời giải</span><span>↘</span></button>
+            <div class="solution-content" hidden><div class="code-toolbar"><span>Book.java</span><button type="button" class="copy-button" data-i18n="copyCode">Sao chép</button></div><pre><code>public class Book {
+    private String title;
+    private double price;
+
+    public Book(String title, double price) {
+        this.title = title;
+        this.price = price;
+    }
+
+    public String getTitle() { return title; }
+    public double getPrice() { return price; }
+}</code></pre><p data-i18n="oopExplain">Đóng gói dữ liệu trong class giúp giới hạn việc sửa trực tiếp thuộc tính và tạo một giao diện sử dụng rõ ràng.</p></div>
+          </article>
+
+          <article class="exercise-card" id="arrays">
+            <div class="card-topline"><span class="card-number">03</span><span class="difficulty" data-i18n="beginner">CƠ BẢN</span></div>
+            <div class="topic-icon icon-array"><span>[ ]</span></div><div class="topic-label">ARRAYS · LOOP</div>
+            <h3 data-i18n="arrayTitle">Tìm giá trị lớn nhất</h3><p class="task-copy" data-i18n="arrayTask">Cho một mảng số nguyên không rỗng. Duyệt mảng và tìm phần tử lớn nhất mà không dùng thư viện ngoài.</p>
+            <div class="sample-box"><span data-i18n="exampleLabel">VÍ DỤ</span><code>[4, 9, 2, 7] <b>→</b> 9</code></div>
+            <button class="text-button hint-toggle" type="button" aria-expanded="false"><span data-i18n="showHint">Xem gợi ý</span><span>＋</span></button><div class="hint-content" hidden data-i18n="arrayHint">Cho max bằng phần tử đầu tiên, sau đó so sánh từng phần tử còn lại với max.</div>
+            <button class="solution-toggle" type="button" aria-expanded="false"><span data-i18n="showSolution">Mở lời giải</span><span>↘</span></button>
+            <div class="solution-content" hidden><div class="code-toolbar"><span>ArrayMaximum.java</span><button type="button" class="copy-button" data-i18n="copyCode">Sao chép</button></div><pre><code>public class ArrayMaximum {
+    public static int maxOf(int[] numbers) {
+        int max = numbers[0];
+        for (int number : numbers) {
+            if (number &gt; max) {
+                max = number;
+            }
+        }
+        return max;
+    }
+}</code></pre><p data-i18n="arrayExplain">Bắt đầu từ numbers[0] để lời giải vẫn đúng khi mọi phần tử đều âm.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="quiz-section" id="quiz"><div class="quiz-heading"><div><div class="section-label"><span>02 /</span><span data-i18n="quizLabel">QUICK CHECK</span></div><h2 data-i18n="quizTitle">Bạn nắm được<br><em>ý chính chưa?</em></h2></div><div class="score-pill"><span class="score-count">0</span><span data-i18n="scoreOf">/ 3 ĐÚNG</span></div></div>
+        <div class="quiz-list">
+          <article class="quiz-question" data-answer="10"><div class="question-number">01</div><div class="question-main"><h3 data-i18n="quizOne">Vòng lặp cộng i từ 1 đến 4. Tổng cuối cùng là bao nhiêu?</h3><div class="answer-options"><button type="button" class="answer-option" data-value="6">6</button><button type="button" class="answer-option" data-value="10">10</button><button type="button" class="answer-option" data-value="15">15</button></div><p class="answer-feedback" aria-live="polite"></p></div></article>
+          <article class="quiz-question" data-answer="first"><div class="question-number">02</div><div class="question-main"><h3 data-i18n="quizTwo">Khi tìm max trong mảng, nên khởi tạo max bằng gì?</h3><div class="answer-options"><button type="button" class="answer-option" data-value="zero" data-i18n="optionZero">Số 0</button><button type="button" class="answer-option" data-value="first" data-i18n="optionFirst">Phần tử đầu tiên</button></div><p class="answer-feedback" aria-live="polite"></p></div></article>
+          <article class="quiz-question" data-answer="encapsulation"><div class="question-number">03</div><div class="question-main"><h3 data-i18n="quizThree">Thuộc tính private trong class hỗ trợ nguyên tắc nào?</h3><div class="answer-options"><button type="button" class="answer-option" data-value="inheritance" data-i18n="optionInheritance">Kế thừa</button><button type="button" class="answer-option" data-value="encapsulation" data-i18n="optionEncapsulation">Đóng gói</button><button type="button" class="answer-option" data-value="loop" data-i18n="optionLoop">Lặp</button></div><p class="answer-feedback" aria-live="polite"></p></div></article>
+        </div><p class="quiz-finish" aria-live="polite" data-i18n="quizStart">Chọn một đáp án ở mỗi câu để xem kết quả.</p>
+      </section>
+      <section class="source-section"><div><div class="section-label"><span>03 /</span><span data-i18n="sourceLabel">SOURCE FILES</span></div><h2 data-i18n="sourceTitle">Tải mã nguồn Java</h2><p data-i18n="sourceText">Mỗi ví dụ có tệp .java độc lập, kèm main để biên dịch và chạy bằng JDK.</p></div><div class="source-links"><a href="java-exercises/SumCalculator.java" download><span>01 / LOOPS</span>SumCalculator.java ↓</a><a href="java-exercises/Book.java" download><span>02 / OOP</span>Book.java ↓</a><a href="java-exercises/ArrayMaximum.java" download><span>03 / ARRAYS</span>ArrayMaximum.java ↓</a></div></section>
+      <section class="next-step"><div class="next-mark">{ }</div><div><span class="section-label" data-i18n="nextLabel">KEEP GOING</span><h2 data-i18n="nextTitle">Một bài tập tại một thời điểm.</h2><p data-i18n="nextText">Thử thay đổi đầu vào, dự đoán kết quả và chạy code bằng JDK để kiểm tra suy nghĩ của bạn.</p></div><a href="#exercises" class="back-top" data-i18n="backToExercises">Về bài tập ↑</a></section>
+    </main>
+    <footer class="lab-footer"><a href="index.html">NGUYỄN THÁI HỌC</a><span>JAVA PRACTICE LAB · 2026</span><a href="#top" data-i18n="topLink">LÊN ĐẦU TRANG ↑</a></footer>
+  </div>
+</body>
+</html>
