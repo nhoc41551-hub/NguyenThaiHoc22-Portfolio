@@ -49,24 +49,14 @@ Object.assign(translations.en, {
 Object.assign(translations.vi, {
   programmingYears: 'NĂM HỌC LẬP TRÌNH', majorProjects: 'DỰ ÁN LỚN',
   aboutP3: 'Mình đã học lập trình trong 4 năm và đặc biệt hứng thú với cách phần mềm vận hành — từ giao diện frontend đến logic backend và cơ sở dữ liệu. Hiện mình tập trung củng cố tư duy lập trình, nâng cao khả năng giải quyết vấn đề và tích lũy trải nghiệm qua thực tập cũng như dự án cộng tác.',
-  formTitle: 'Gửi lời nhắn', formIntro: 'Để lại nội dung và cách mình có thể liên hệ lại với bạn.',
-  formName: 'Họ và tên *', formEmail: 'Email để phản hồi *', formPhone: 'Số điện thoại (không bắt buộc)',
-  formMethod: 'Ưu tiên liên hệ qua', formMessage: 'Lời nhắn *', formSubmit: 'Gửi lời nhắn ↗',
-  formPrivacy: 'Thông tin sẽ được chuyển qua FormSubmit để gửi đến Gmail của mình. Vui lòng chỉ gửi nội dung bạn đồng ý chia sẻ.',
-  formSending: 'Đang gửi lời nhắn…', formSuccess: 'Đã gửi thành công. Cảm ơn bạn — mình sẽ phản hồi qua thông tin liên hệ đã cung cấp.',
-  formPending: 'Yêu cầu đã tới FormSubmit nhưng email chưa được kích hoạt. Hãy kiểm tra Gmail (kể cả thư rác) và bấm liên kết xác nhận; dịch vụ sẽ chuyển các tin đang chờ sau khi kích hoạt.',
-  formError: 'Chưa gửi được. Kiểm tra kết nối mạng rồi thử lại, hoặc gửi email trực tiếp đến nhoc41551@gmail.com nhé.'
+  contactCall: 'Gọi điện · 0367 730 151', contactSms: 'Nhắn SMS', contactSmsHint: 'Mở ứng dụng tin nhắn',
+  contactZaloTitle: 'Kết nối qua Zalo', contactZaloHint: 'Quét mã QR bằng ứng dụng Zalo', contactQrOpen: 'Mở ảnh mã QR ↗'
 });
 Object.assign(translations.en, {
   programmingYears: 'YEARS LEARNING PROGRAMMING', majorProjects: 'MAJOR PROJECTS',
   aboutP3: 'I have studied programming for four years and am especially interested in how software works—from frontend interfaces to backend logic and databases. I am focused on strengthening my fundamentals, problem-solving skills, and practical experience through internships and collaborative projects.',
-  formTitle: 'Send me a message', formIntro: 'Tell me what you would like to discuss and how I can reach you.',
-  formName: 'Full name *', formEmail: 'Reply email *', formPhone: 'Phone (optional)',
-  formMethod: 'Preferred contact method', formMessage: 'Message *', formSubmit: 'Send message ↗',
-  formPrivacy: 'Your details will be processed by FormSubmit and forwarded to my Gmail. Please share only information you are comfortable providing.',
-  formSending: 'Sending your message…', formSuccess: 'Message sent. Thank you — I will reply using the contact details you provided.',
-  formPending: 'FormSubmit received the request, but the recipient email is not activated yet. Check Gmail (including spam) and click its confirmation link; pending messages should be forwarded after activation.',
-  formError: 'Could not send your message. Check your connection and try again, or email me directly at nhoc41551@gmail.com.'
+  contactCall: 'Call · +84 367 730 151', contactSms: 'Send SMS', contactSmsHint: 'Opens your messaging app',
+  contactZaloTitle: 'Connect on Zalo', contactZaloHint: 'Scan this QR code with Zalo', contactQrOpen: 'Open QR image ↗'
 });
 
 function setLanguage(language) {
@@ -116,52 +106,3 @@ if ('IntersectionObserver' in window) {
 let initialLanguage = 'vi';
 try { initialLanguage = localStorage.getItem('portfolio-language') || 'vi'; } catch {}
 setLanguage(initialLanguage);
-
-const contactForm = document.querySelector('#contact-form');
-if (contactForm) contactForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  if (!contactForm.reportValidity()) return;
-  const submitButton = contactForm.querySelector('.form-submit');
-  const status = document.querySelector('#form-status');
-  const dictionary = translations[document.documentElement.lang] || translations.vi;
-  const formData = new FormData(contactForm);
-  const recipient = new URL(contactForm.action).pathname.replace(/^\//, '');
-  formData.set('_replyto', String(formData.get('email') || '').trim());
-  submitButton.disabled = true;
-  submitButton.textContent = dictionary.formSending;
-  status.classList.remove('error');
-  status.textContent = dictionary.formSending;
-  try {
-    const response = await fetch(`https://formsubmit.co/ajax/${recipient}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(formData))
-    });
-    const rawResponse = await response.text();
-    let result = {};
-    try { result = JSON.parse(rawResponse); } catch {}
-    const providerMessage = String(result.message || result.msg || '');
-    const successful = result.success === true || result.success === 'true';
-    if (!response.ok || !successful) {
-      if (/activat|confirm/i.test(providerMessage)) {
-        status.textContent = dictionary.formPending;
-        return;
-      }
-      throw new Error(providerMessage || `HTTP ${response.status}`);
-    }
-    contactForm.reset();
-    status.textContent = dictionary.formSuccess;
-  } catch (error) {
-    console.warn('AJAX submission failed:', error);
-    if (error instanceof TypeError) {
-      // Nếu gặp lỗi mạng hoặc bị chặn AJAX, tự động submit dạng form chuẩn
-      contactForm.submit();
-      return;
-    }
-    status.classList.add('error');
-    status.textContent = `${dictionary.formError} (${error.message})`;
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = dictionary.formSubmit;
-  }
-});
