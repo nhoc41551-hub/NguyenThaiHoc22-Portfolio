@@ -124,15 +124,18 @@ if (contactForm) contactForm.addEventListener('submit', async (event) => {
   const submitButton = contactForm.querySelector('.form-submit');
   const status = document.querySelector('#form-status');
   const dictionary = translations[document.documentElement.lang] || translations.vi;
+  const formData = new FormData(contactForm);
+  const recipient = new URL(contactForm.action).pathname.replace(/^\//, '');
+  formData.set('_replyto', String(formData.get('email') || '').trim());
   submitButton.disabled = true;
   submitButton.textContent = dictionary.formSending;
   status.classList.remove('error');
   status.textContent = dictionary.formSending;
   try {
-    const response = await fetch('https://formsubmit.co/ajax/nhoc41551@gmail.com', {
+    const response = await fetch(`https://formsubmit.co/ajax/${recipient}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
+      body: JSON.stringify(Object.fromEntries(formData))
     });
     const rawResponse = await response.text();
     let result = {};
@@ -141,7 +144,6 @@ if (contactForm) contactForm.addEventListener('submit', async (event) => {
     const successful = result.success === true || result.success === 'true';
     if (!response.ok || !successful) {
       if (/activat|confirm/i.test(providerMessage)) {
-        contactForm.reset();
         status.textContent = dictionary.formPending;
         return;
       }
@@ -150,8 +152,14 @@ if (contactForm) contactForm.addEventListener('submit', async (event) => {
     contactForm.reset();
     status.textContent = dictionary.formSuccess;
   } catch (error) {
+    console.warn('AJAX submission failed:', error);
+    if (error instanceof TypeError) {
+      // Nếu gặp lỗi mạng hoặc bị chặn AJAX, tự động submit dạng form chuẩn
+      contactForm.submit();
+      return;
+    }
     status.classList.add('error');
-    status.textContent = error instanceof TypeError ? dictionary.formError : `${dictionary.formError} (${error.message})`;
+    status.textContent = `${dictionary.formError} (${error.message})`;
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = dictionary.formSubmit;
